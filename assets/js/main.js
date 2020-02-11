@@ -9,7 +9,7 @@ Design and Developed by: Devitems
 /*================================================
 [  Table of contents  ]
 ================================================
-	01. Sticky Menu
+	01. Clear Menu
 	02. Owl Carousel
 	03. ScrollUp jquery
 	04. wow js active
@@ -20,7 +20,7 @@ Design and Developed by: Devitems
 	09. Mail Chimp
 	10. ColorSwitcher
 
- 
+
 ======================================
 [ End table content ]
 ======================================*/
@@ -28,118 +28,6 @@ Design and Developed by: Devitems
 
 (function($) {
     "use strict";
-    
-/*------------------------------------
-    01. Sticky Menu
--------------------------------------- */
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 1){
-            $('#sticky-header').addClass("sticky");
-
-            if($(this).scrollTop() > 132){
-                $('.mobile-menu-area').addClass("sticky");
-            }else{
-                $('.mobile-menu-area').removeClass("sticky");
-            }
-        }
-        else{
-            $('#sticky-header').removeClass("sticky");
-        }
-    });
-    
-/*------------------------------------
-    02. Owl Carousel
-------------------------------------- */
-/*------------------------------------
-    Testimonial Carousel
-------------------------------------- */
-	$('.testimonial-carousel').owlCarousel({
-		loop:true,
-		margin:0,
-		nav:false,
-		animateOut: 'slideOutDown',
-		animateIn: 'zoomInLeft',		
-		autoplay:false,
-        dots:false,
-		smartSpeed:3000,
-		navText: ["<i class='zmdi zmdi-chevron-left'></i>","<i class='zmdi zmdi-chevron-right'></i>"],
-		responsive:{
-			0:{
-				items:1
-			},
-			600:{
-				items:1
-			},
-			1000:{
-				items:1
-			}
-		}
-	});	
-    
-/*------------------------------------
-    Blog Carousel
--------------------------------------- */
-    $('.blog-carousel').owlCarousel({
-        loop:true,
-        autoPlay: false, 
-        smartSpeed: 2000,
-        fluidSpeed: true,
-        nav:false,
-        dots:false,
-        margin:30,
-        navText: ["<i class='zmdi zmdi-chevron-left'></i>","<i class='zmdi zmdi-chevron-right'></i>"],
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:1 // from 0px up to 479px screen size 
-            },
-            480:{
-                items:1, // from 480 to 677 
-            },
-            768:{
-                items:2, // from this breakpoint 678 to 959
-            },
-            960:{
-                items:2, // from this breakpoint 960 to 1199
-            },
-            1200:{
-                items:3,
-                loop:false,
-            }
-        }        
-    }); 
-    
-/*------------------------------------
-    Category Job Active
--------------------------------------- */
-	$('.category-job-list-actiive').owlCarousel({
-		loop:true,
-        autoPlay: false, 
-        smartSpeed: 1000,
-        margin:25,
-		nav:false,
-        dots:true,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:1 // from 0px up to 479px screen size 
-            },
-            480:{
-                items:1, // from 480 to 677 
-            },
-            767:{
-                items:2, // from this breakpoint 678 to 959
-            },
-            960:{
-                items:4, // from this breakpoint 960 to 1199
-            },
-            1200:{
-                items:4,
-                loop:false,
-            }
-        }        
-    }); 
-	
 /*-------------------------------------------
     03. ScrollUp jquery
 --------------------------------------------- */
@@ -148,75 +36,265 @@ Design and Developed by: Devitems
         easingType: 'linear',
         scrollSpeed: 900,
         animation: 'fade'
-    });   
-    
+    });
+
 /*-------------------------------------------
     04. wow js active
 --------------------------------------------- */
     new WOW().init();
-    
+
 /*-------------------------------------------
     05. jQuery MeanMenu
 --------------------------------------------- */
 	jQuery('nav#dropdown').meanmenu();
-	
+
 /*--------------------------
     06. Counter Up
----------------------------- */	
-    $('.counter').counterUp({
-        delay: 70,
-        time: 5000
-    }); 
-    
+---------------------------- */
+    // $('.counter').counterUp({
+    //     delay: 70,
+    //     time: 5000
+    // });
+
 /*------------------------------------
 	07. Textilate Activation
 --------------------------------------*/
-    $('.tlt').textillate({
-        loop: true,
-        minDisplayTime: 2500
-    });
-    
+    // $('.tlt').textillate({
+    //     loop: true,
+    //     minDisplayTime: 2500
+    // });
+
 /*------------------------------------
 	08. Video Player
 --------------------------------------*/
-    $(".player").YTPlayer({
-        showControls: false
-    });    
-    
-    $(".player-small").YTPlayer({
-        showControls: true
+    // $(".player").YTPlayer({
+    //     showControls: false
+    // });
+
+    // $(".player-small").YTPlayer({
+    //     showControls: true
+    // });
+
+    // $(".player-blog").YTPlayer({
+    //     showControls: true
+    // });
+
+    /*----------------------------
+        10. Nice Select Activation
+    ------------------------------ */
+    $('select:not(.ignore)').niceSelect();
+
+
+
+    /*------------------------------------
+    	11. Customize Form
+    --------------------------------------*/
+
+    // Open
+    $('.toggle-sidebar').click(function() {
+        $(".customizeContainer").css("right", "0");
     });
-    
-    $(".player-blog").YTPlayer({
-        showControls: true
+
+    // Close
+    $('.customize .close-btn').click(function() {
+        $(".customizeContainer").css("right", "-100vw");
     });
-    
-/*------------------------------------
-	09. Mail Chimp
---------------------------------------*/
-    $('#mc-form').ajaxChimp({
-        language: 'en',
-        callback: mailChimpResponse,
-        // ADD YOUR MAILCHIMP URL BELOW HERE!
-        url: 'http://themeshaven.us8.list-manage.com/subscribe/post?u=759ce8a8f4f1037e021ba2922&amp;id=a2452237f8'
+
+    // Close using the empty space
+    $('.customizeContainer').on('click', function(e) {
+        if (e.target.classList.contains('clickToClose')) {
+            $(".customizeContainer").css("right", "-100vw");
+        }
     });
-    
-    function mailChimpResponse(resp) {
-        
-        if (resp.result === 'success') {
-            $('.mailchimp-success').html('' + resp.msg).fadeIn(900);
-            $('.mailchimp-error').fadeOut(400);
-            
-        } else if(resp.result === 'error') {
-            $('.mailchimp-error').html('' + resp.msg).fadeIn(900);
-        }  
+
+    $('input[name="dateRadio"]').on('click', function(e) {
+        $('input[name="date"]').val('');
+        if (e.target.value == 'Flexible') {
+            $('input[name="date"]').css("display", "none");
+        }
+        else if (e.target.value == 'Month/Year') {
+            $('input[name="date"]').css("display", "block");
+
+            $('[data-toggle="datepicker"]').datepicker('destroy');
+            $('[data-toggle="datepicker"]').datepicker({format: 'mm/yyyy'});
+        }
+        else if (e.target.value == 'Exact Date') {
+            $('input[name="date"]').css("display", "block");
+
+            $('[data-toggle="datepicker"]').datepicker('destroy');
+            $('[data-toggle="datepicker"]').datepicker({format: 'mm/dd/yyyy'});
+        }
+    });
+
+
+
+    /*------------------------------------
+    	12. Date Picker
+    --------------------------------------*/
+
+    $('[data-toggle="datepicker"]').datepicker();
+
+
+
+    /*------------------------------------
+    	13. Guide Box
+    --------------------------------------*/
+
+    // Open
+    $('.guideButton').click(function() {
+        // Hide the other info
+        $('.guideBoxInfo').css("display", "none");
+
+        // Get the info ready
+        var guideNumber = $(this)[0].getAttribute('value');
+        var guideInfo = $('.guideBoxInfo[value="' + guideNumber + '"]');
+        guideInfo.css("display", "flex");
+        $('.guideBox').append(guideInfo);
+
+        // Reveal the box
+        $(".guideBoxContainer").css("right", "0");
+    });
+
+    // Close
+    $('.guideBoxContainer .close-btn').click(function() {
+        $(".guideBoxContainer").css("right", "-100vw");
+    });
+
+    // Close using the empty space
+    $('.guideBoxContainer').on('click', function(e) {
+        if (e.target.classList.contains('clickToClose')) {
+            $(".guideBoxContainer").css("right", "-100vw");
+        }
+    });
+
+    if (typeof readMoreInit !== 'undefined') {
+        if (readMoreInit == true) {
+            var readMoreTexts = document.getElementsByClassName(readMoreClass);
+            for (var i = 0; i < readMoreTexts.length; i++) {
+                var readMoreText = $(readMoreTexts[i]);
+                var maxHeight = parseInt(readMoreText.css('line-height')) * readMoreLines;
+                if (readMoreText.height() <= maxHeight) { // If it's less than or equal to the amount of lines
+                    readMoreTexts[i].nextSibling.nextSibling.style.display = 'none';
+                } else { // If it's a lot of text
+                    readMoreTexts[i].nextSibling.nextSibling.style.display = 'block';
+                }
+            }
+            $('.' + readMoreClass).css('max-height', maxHeight + "px");
+        }
     }
 
 
-        /*----------------------------
-    17. Nice Select Activation
-    ------------------------------ */
-    $('select').niceSelect();
-
-    
 })(jQuery);
+
+/*------------------------------------
+    14. Highlight Buttons on Tour Sidebar
+--------------------------------------*/
+
+if (document.getElementById('scrollAnimation') != undefined) {
+    // How early to highlight the buttons in pixels
+    pixelsBeforeElementOffset = 200;
+
+    // Get the positions of elements to scroll to
+    elements = document.getElementsByClassName('tourInfoBox');
+    elementPositions = [];
+    for (var i = 0; i < elements.length; i++) {
+        elementPositions.push(elements[i].offsetTop - pixelsBeforeElementOffset);
+    }
+
+    window.onscroll = function() {
+        // Figure out which element we are viewing
+        var scrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
+        targetElementIndex = -1;
+        for (var i = 0; i < elementPositions.length; i++) {
+            if (scrollPosition >= elementPositions[i]) {
+                targetElementIndex += 1;
+            }
+        }
+
+        // Highlight the sidebar button
+        if (targetElementIndex >= 0) {
+            sidebarButtons = document.getElementsByClassName('sidebarButton');
+            for (var i = 0; i < sidebarButtons.length; i++) {
+                sidebarButtons[i].classList.remove('selected');
+            }
+            if (targetElementIndex <= 3) { // Don't highlight the button "Book this trip"
+                sidebarButtons[targetElementIndex].classList.add('selected');
+            }
+
+        }
+
+        // Also, lock the sidebar in place at the bottom of the page
+        if (scrollPosition > document.getElementsByClassName('footer')[0].offsetTop - document.documentElement.clientHeight) {
+            document.getElementById('sidebar').classList.add('locked');
+        } else {
+            document.getElementById('sidebar').classList.remove('locked');
+        }
+    }
+}
+
+
+
+/*------------------------------------
+    15. Change Image
+--------------------------------------*/
+
+function changeImage(id) {
+    var images = document.getElementsByClassName('mainImage');
+    for (var i = 0; i < images.length; i++) {
+        images[i].style.display = 'none';
+    }
+    document.getElementById(id).style.display = 'block';
+}
+
+function scrollImageNav(leftOrRight) {
+    nav = document.getElementsByClassName('smallImageContainerContainer')[0];
+    console.log(nav);
+    if (leftOrRight == 'left') {
+        nav.scrollLeft -= nav.clientWidth;
+    } else {
+        nav.scrollLeft += nav.clientWidth;
+    }
+}
+
+
+
+/*------------------------------------
+    16. Read More
+--------------------------------------*/
+
+function readMore(i) {
+    var targetDescription = document.getElementById(readMoreClass + i);
+    var targetButton = document.getElementById(readMoreButtonClass + i);
+    document.getElementById(readMoreClass + i).classList.toggle('more');
+
+    if (targetDescription.classList.contains('more')) {
+        targetButton.textContent = 'Show less...';
+    } else {
+        targetButton.textContent = 'Read more...';
+    }
+}
+
+
+
+/*------------------------------------
+    17. Add Background to Navbar on Scroll
+--------------------------------------*/
+
+targetToChange = $('#sticky-header'); // Element to change
+targetToWatch = $('#clearNavHere'); // Element to see if we've scrolled past or not
+$(document).on('scroll', function() {
+    if ($(this).scrollTop() >= targetToWatch[0].clientHeight - targetToChange[0].clientHeight) {
+        targetToChange.removeClass('clear');
+    } else {
+        targetToChange.addClass('clear');
+    }
+})
+
+$(document).trigger('scroll');
+setTimeout(function(){
+    $(document).trigger('scroll');
+}, 1000);
+
+$(function(){
+    $('body').addClass('ready');
+})

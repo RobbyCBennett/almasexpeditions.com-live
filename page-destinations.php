@@ -1,12 +1,12 @@
 <?php
-/**
-Template Name: Destination Page
- */
+/*
+    Template Name: Destination Page
+*/
 
 get_header();
 ?>
 
-    <div class="banner-text-area-all-trips bg-5 bg-black-transparent-layer" style="background-image: url(<?php if(get_field('background_image')) the_field('background_image'); ?>);">
+    <div id="clearNavHere" class="banner-text-area-all-trips bg-5 bg-black-transparent-layer" style="background-image: url(<?php if(get_field('background_image')) the_field('background_image'); ?>);">
         <div class="container">
             <div class="row">
                 <div class="col-xl-10 col-lg-12">
@@ -25,17 +25,16 @@ get_header();
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="about-us-head color-head-balck"><?php if(get_field('d_list_heading')) the_field('tour_list_heading'); ?></h3>
+                    <h3 class="about-us-head color-head-balck"><?php the_field('page_sub_title'); ?></h3>
                 </div>
             </div>
 
             <div class="next-tour mt-50 destination-tour">
-                <div class="row">
-                    <div class="col-md-4 col-lg-4 col-sm-4 pb-30">
+                <div class="row box">
+                    <div class="col-lg-4 col-md-4 col-5">
                         <a href="<?php echo site_url() . '/mexico'; ?>">
                             <div class="place-card">
-                                <div class="img-text-holder">
-                                    <img src="<?php $image = get_field('image'); echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>">
+                                <div class="img-text-holder" style="background-image: url(<?php echo get_field('image')['sizes']['tour-thumb'] ?>)">
                                     <div class="img-text">
                                         <p><?php if(get_field('name')) the_field('name'); ?></p>
                                     </div>
@@ -43,11 +42,32 @@ get_header();
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-4 col-lg-4 col-sm-4 pb-30">
+                    <div class="col-lg-4 col-md-4 col-7" style='style="margin-bottom: 5rem;"'>
+                        <h3 class='destination-heading'><?php the_field('name'); ?></h3>
+                        <p id='readMoreText1' class='normal-text color-gray tour-regular readMoreText' style='overflow-y: hidden;'><?php the_field('description'); ?></p>
+                        <span class="a-yellow readMore" id="readMoreButton1" onclick="readMore(1)" style="font-size: 20px;">Read more...</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-12 viewTripsButtonContainer">
+                        <a href="<?php echo site_url() . '/mexico'; ?>">
+                            <button class='viewTripsButton'>View Trips</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="row box">
+                    <div class="col-lg-4 col-md-4 col-12 viewTripsButtonContainer">
+                        <a href="<?php echo site_url() . '/guatemala'; ?>">
+                            <button class='viewTripsButton'>View Trips</button>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-7" style='style="margin-bottom: 5rem;"'>
+                        <h3 class='destination-heading'><?php the_field('g_name'); ?></h3>
+                        <p id='readMoreText2' class='normal-text color-gray tour-regular readMoreText' style='overflow-y: hidden;'><?php the_field('g_description'); ?></p>
+                        <span class="a-yellow readMore" id="readMoreButton2" onclick="readMore(2)" style="font-size: 20px;">Read more...</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-5">
                         <a href="<?php echo site_url() . '/guatemala'; ?>">
                             <div class="place-card">
-                                <div class="img-text-holder">
-                                    <img src="<?php $image2 = get_field('g_image'); echo $image2['url']; ?>" alt="<?php echo $image2['alt']; ?>">
+                                <div class="img-text-holder" style="background-image: url(<?php echo get_field('g_image')['sizes']['tour-thumb'] ?>)">
                                     <div class="img-text">
                                         <p><?php if(get_field('g_name')) the_field('g_name'); ?></p>
                                     </div>
@@ -55,11 +75,12 @@ get_header();
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-4 col-lg-4 col-sm-4 pb-30">
+                </div>
+                <div class="row box">
+                    <div class="col-lg-4 col-md-4 col-5">
                         <a href="<?php echo site_url() . '/belize'; ?>">
                             <div class="place-card">
-                                <div class="img-text-holder">
-                                    <img src="<?php $image3 = get_field('b_image'); echo $image3['url']; ?>" alt="<?php echo $image3['alt']; ?>">
+                                <div class="img-text-holder" style="background-image: url(<?php echo get_field('b_image')['sizes']['tour-thumb'] ?>)">
                                     <div class="img-text">
                                         <p><?php if(get_field('b_name')) the_field('b_name'); ?></p>
                                     </div>
@@ -67,15 +88,28 @@ get_header();
                             </div>
                         </a>
                     </div>
+                    <div class="col-lg-4 col-md-4 col-7" style='style=margin-bottom: 5rem;'>
+                        <h3 class='destination-heading'><?php the_field('b_name'); ?></h3>
+                        <p id='readMoreText3' class='normal-text color-gray tour-regular readMoreText' style='overflow-y: hidden;'><?php the_field('b_description'); ?></p>
+                        <span class="a-yellow readMore" id="readMoreButton3" onclick="readMore(3)" style="font-size: 20px;">Read more...</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-12 viewTripsButtonContainer">
+                        <a href="<?php echo site_url() . '/belize'; ?>">
+                            <button class='viewTripsButton'>View Trips</button>
+                        </a>
+                    </div>
                 </div>
-
             </div>
-
 
         </div>
     </section>
 
-
+    <script>
+        var readMoreInit = true;
+        readMoreClass = 'readMoreText';
+        readMoreButtonClass = 'readMoreButton';
+        readMoreLines = 9;
+    </script>
 
 
 

@@ -1,12 +1,12 @@
 <?php
-/**
-Template Name: Contact Us Page
- */
+/*
+    Template Name: Contact Us Page
+*/
 
 get_header();
 ?>
 
-<div class="banner-text-area-all-trips bg-5 bg-black-transparent-layer" style="background-image: url(<?php if(get_field('b_background_image')) the_field('b_background_image'); ?>);">
+<div id="clearNavHere" class="banner-text-area-all-trips bg-5 bg-black-transparent-layer" style="background-image: url(<?php if(get_field('b_background_image')) the_field('b_background_image'); ?>);">
     <div class="container">
         <div class="row">
             <div class="col-xl-10 col-lg-12">
@@ -44,26 +44,32 @@ get_header();
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-lg-4">
                     <div class="contact-info-box">
-                        <p class="text-center"><i class="fas fa-phone-alt"></i></p>
-                        <h3>PHONE</h3>
+                        <p><i class="fas fa-phone-alt"></i></p>
+                        <h3>Phone</h3>
                         <p class="color-gray"><?php if(get_field('p_description')) the_field('p_description'); ?></p>
-                        <p class="color-blue"><?php if(get_field('phone_number')) the_field('phone_number'); ?></p>
+                        <a class='a-yellow' href='tel:<?php the_field("phone_number_without_format") ?>'>
+                            <p><?php the_field('phone_number') ?></p>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-lg-4">
                     <div class="contact-info-box">
-                        <p class="text-center"><i class="fal fa-envelope"></i></p>
-                        <h3>EMAIL</h3>
+                        <p><i class="fal fa-envelope"></i></p>
+                        <h3>Email</h3>
                         <p class="color-gray"><?php if(get_field('e_description')) the_field('e_description'); ?></p>
-                        <p class="color-blue"><?php if(get_field('email')) the_field('email'); ?></p>
+                        <a class='a-yellow' target='_blank' href='mailto:<?php the_field("email") ?>'>
+                            <p><?php the_field('email') ?></p>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-lg-4">
                     <div class="contact-info-box">
-                        <p class="text-center"><i class="fas fa-location-arrow"></i></p>
-                        <h3>LOCATION</h3>
-                        <p class="color-gray"><?php if(get_field('l_description')) the_field('l_description'); ?></p>
-                        <p class="color-blue"><?php if(get_field('location')) the_field('location'); ?></p>
+                        <p><i class="fas fa-location-arrow"></i></p>
+                        <h3>Location</h3>
+                        <p class="color-gray"><?php if(get_field('location')) the_field('location'); ?></p>
+                        <a class='a-yellow' target='_blank' href=<?php the_field('location_link') ?>>
+                            <p><?php the_field('location_link_text') ?></p>
+                        </a>
                     </div>
                 </div>
             </div>

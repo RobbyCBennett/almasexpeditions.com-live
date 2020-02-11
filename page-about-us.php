@@ -1,81 +1,115 @@
 <?php
-/**
+/*
 Template Name: About Us Page
- */
+*/
 
 get_header();
 ?>
-    <div class="banner-text-area bg-5 bg-black-transparent-layer" style="background-image: url(<?php if(get_field('banner_background')) the_field('banner_background'); ?>);">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-10 col-lg-12">
-                    <div class="content">
-                        <h2 class="banner-head color-yellow"><?php if(get_field('banner_heading')) the_field('banner_heading'); ?></h2>
-                        <h3 class="banner-head-2 text-white max-w-450 mt-15"><?php if(get_field('b_sub_heading')) the_field('b_sub_heading'); ?></h3>
-                    </div>
+<div id="clearNavHere" class="banner-text-area bg-5 bg-black-transparent-layer" style="background-image: url(<?php if(get_field('banner_background')) the_field('banner_background'); ?>); background-position: center;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-10 col-lg-12">
+                <div class="content">
+                    <h2 class="banner-head color-yellow"><?php if(get_field('banner_heading')) the_field('banner_heading'); ?></h2>
+                    <h3 class="banner-head-2 text-white max-w-450 mt-15"><?php if(get_field('b_sub_heading')) the_field('b_sub_heading'); ?></h3>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Search Form End -->
+</div>
+<!-- Search Form End -->
 
 
-    <section class="about-section p-5 pr-0 pl-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="about-us-head color-head-balck"><?php if(get_field('top_heading')) the_field('top_heading'); ?></h3>
-                    <p class="about-us-head-2 color-gray mt-20"><?php if(get_field('top_description')) the_field('top_description'); ?></p>
-                </div>
-            </div>
-            <div class="row mt-30">
-                <div class="col-md-6 col-sm-6 col-lg-6">
-                    <img class="img-fluid" src="<?php if(get_field('left_comtent_picture')) {$image = get_field('left_comtent_picture'); echo $image['url']; } ?>" alt="About Us">
-                </div>
-                <div class="col-md-6 col-sm-6 col-lg-6">
-                    <h3 class="about-us-head color-head-balck mt-30"><?php if(get_field('right_heading')) the_field('right_heading'); ?></h3>
-                    <p class="about-us-head-2 color-gray mt-20"><?php if(get_field('right_content_description')) the_field('right_content_description'); ?></p>
-                </div>
-
-            </div>
-
-            <div class="row mt-50">
-                <div class="col-md-12">
-                    <h3 class="about-us-head color-head-balck"><?php if(get_field('our_g_heading')) the_field('our_g_heading'); ?></h3>
-                    <p class="about-us-head-2 color-gray mt-20"><?php if(get_field('our_g_sub_heading')) the_field('our_g_sub_heading'); ?></p>
-                </div>
-            </div>
-
-            <div class="row mt-30">
-
+<section class="about-section p-5 pr-0 pl-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
                 <?php
-
-                if( have_rows('guides_man') ):
-
-                    while ( have_rows('guides_man') ) : the_row(); ?>
-
-                        <div class="col-md-5">
-                            <img class="img-fluid" src="<?php $img1 = the_sub_field('image'); echo $img1; ?>" alt="<?php the_sub_field('name'); ?>">
-                            <p class="person-name color-gray mt-40 mob-mb-30 mob-mt-20"><?php the_sub_field('name'); ?></p>
-                        </div>
-                        <div class="col-md-1"></div>
-
-                    <?php
-
-                    endwhile;
-
-                else :
-
-                endif;
-
+                    $our_story = get_field('our_story');
+                    echo '<h3 class="about-us-head color-head-black">' . $our_story['heading'] . '</h3>';
+                    echo '<p class="about-us-head-2 color-gray mt-20">' . $our_story['content'] . '</p>';
                 ?>
-
             </div>
-
         </div>
-    </section>
+    </div>
+</section>
 
-    <?php include(TEMPLATEPATH . '/template-parts/shared/find-tour.php') ?>
+<section class="about-section gray-background p-5 pr-0 pl-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <?php
+                    $our_team = get_field('our_team');
+                    echo '<h3 class="about-us-head color-head-black text-center">' . $our_team['heading'] . '</h3>';
+
+                    echo '<div class="row guideButtons">';
+                        while (have_rows('our_team')) {
+                            the_row();
+                            $i = 0;
+                            while (have_rows('guides')) {
+                                the_row();
+
+                                $i++;
+
+                                // Button
+                                echo '<div class="col-md-3 col-6">';
+                                    echo '<div value="' . $i . '" class="guideButton">';
+                                        echo '<div>';
+                                            echo '<img src="' . wp_get_attachment_image_url(get_sub_field('small_picture'), 'profile-thumb') . '">';
+                                        echo '</div>';
+                                        echo '<p class="about-us-head-2 color-gray">' . get_sub_field('name') . '</p>';
+                                    echo '</div>';
+                                echo '</div>';
+
+                                // Guide info
+                                echo '<div value="' . $i . '" class="row guideBoxInfo">';
+                                    echo '<div class="col-md-5">';
+                                        echo '<img src="' . wp_get_attachment_image_url(get_sub_field('large_picture'), 'large') . '">';
+
+                                        echo '<h4>' . get_sub_field('name') . '</h4>';
+                                        echo '<p>' . get_sub_field('title') . '</p>';
+                                    echo '</div>';
+                                    echo '<div class="col-md-7">';
+                                        echo '<p>' . get_sub_field('bio') . '</p>';
+                                    echo '</div>';
+                                echo '</div>';
+                            }
+                        }
+                    echo '</div>';
+                ?>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-section p-5 pr-0 pl-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <?php
+                    $our_philosophy = get_field('our_philosophy');
+                    echo '<h3 class="about-us-head color-head-black">' . $our_philosophy['heading'] . '</h3>';
+                    echo '<img class="large-image" src="' . $our_philosophy['image'] . '"></img>';
+                    echo '<p class="about-us-head-2 color-gray mt-20">' . $our_philosophy['content'] . '</p>';
+                ?>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class='clickToClose guideBoxContainer'>
+    <div class="clickToClose container">
+        <div class="clickToClose row justify-content-center">
+            <div class="col-lg-10 guideBox">
+                <div class="cross-brn"><button class="btn close-btn">X</button></div>
+                <!-- main.js moves the guideBoxInfo here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php include(TEMPLATEPATH . '/template-parts/shared/find-tour.php') ?>
 
 <?php
 

@@ -4,6 +4,9 @@ Template:  jobhere
 NOTE: This is Footer style file. All footer related style included in this file.
 
 --------------------------------------*/
+.footer, .copyright-area {
+    position: relative;
+}
 .footer-area {
   background: rgba(0, 0, 0, 0) url("../../images/bg/footer.jpg") no-repeat scroll center center / cover ;
 }

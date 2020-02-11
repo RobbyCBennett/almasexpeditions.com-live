@@ -92,8 +92,12 @@
      .abt-img {
          padding-right: 0px;
     }
-     .sidebar-right{
+     .sidebar-right {
          margin-top: 40px;
+    }
+
+    .top-header, #sticky-header > .container {
+        display: none !important;
     }
 }
 /* Tablet desktop :768px. */
@@ -507,9 +511,9 @@
      #sticky-header {
         width: auto;
     }
-     .sticky .logo img {
+     /* .sticky .logo img {
         width: auto;
-    }
+    } */
      .logo img {
         transition: none 0s ease 0s ;
     }

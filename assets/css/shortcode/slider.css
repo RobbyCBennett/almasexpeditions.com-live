@@ -5,79 +5,79 @@ NOTE: This is Slider style file. All Slider related style included in this file.
 
 --------------------------------------*/
 .banner-text-area {
-  padding-top: 350px;
+    padding-top: 450px;
     padding-bottom: 30px;
 }
 .form-container {
-  color: #555454;
-  font-family: "montserratregular";
-  font-size: 12px;
-  position: relative;
-  z-index: 3;
+    color: #555454;
+    font-family: "montserratregular";
+    font-size: 12px;
+    position: relative;
+    z-index: 3;
 }
 .box-select {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  z-index: 9;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 9;
 }
 .select {
     margin-right: 10px;
     position: relative;
 }
 .select:not(:last-child) {
-  width: 27%;
+    width: 27%;
 }
 .select.large {width: 260px;}
 .select.small {width: 190px;}
 .select.medium {width: 200px;}
 
 .select select {
-  -moz-appearance: none;
-  background: #ffffff url("images/icons/arrow.png") no-repeat scroll 92% 50%;
-  border: medium none;
-  color: #555454;
-  cursor: pointer;
-  font-size: 13px;
-  height: 60px;
-  padding: 0 16px;
-  width: 100%;
+    -moz-appearance: none;
+    background: #ffffff url("images/icons/arrow.png") no-repeat scroll 92% 50%;
+    border: medium none;
+    color: #555454;
+    cursor: pointer;
+    font-size: 13px;
+    height: 60px;
+    padding: 0 16px;
+    width: 100%;
 }
 .select button {
-  background: #0B0B0B none repeat scroll 0 0;
-  color: #fff;
-  font-size: 20px;
-  line-height: 20px;
-  padding: 10px 30px;
+    background: #0B0B0B none repeat scroll 0 0;
+    color: #fff;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 10px 30px;
     font-family: 'Roboto-b';
     margin-top: 20px;
 }
 .select .nice-select {
-  border: medium none;
-  border-radius: 0;
-  color: #ababab;
-  height: 60px;
-  line-height: 60px;
-  width: 100%;
+    border: medium none;
+    border-radius: 0;
+    color: #ababab;
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
 }
 .nice-select::after {
-  right: 16px;
+    right: 16px;
 }
 .nice-select .list {
-  width: 100%;
+    width: 100%;
 }
 .job-search-content > h4 {
-  color: #ffff;
-  font-family: montserratsemi_bold;
-  font-size: 30px;
+    color: #ffff;
+    font-family: montserratsemi_bold;
+    font-size: 30px;
 }
 .job-search-content h2 {
-  color: #fff;
-  font-family: montserratbold;
-  font-size: 70px;
-  margin-bottom: 33px;
-  margin-top: 14px;
-  text-transform: uppercase;
+    color: #fff;
+    font-family: montserratbold;
+    font-size: 70px;
+    margin-bottom: 33px;
+    margin-top: 14px;
+    text-transform: uppercase;
 }
 
 .preview-2 .nivo-directionNav {display: none;}
@@ -112,17 +112,17 @@ NOTE: This is Slider style file. All Slider related style included in this file.
     vertical-align: middle;
 }
 h1.title1 {
-  font-family: "montserratextrabold";
-  font-size: 60px;
-  text-transform: capitalize;
+    font-family: "montserratextrabold";
+    font-size: 60px;
+    text-transform: capitalize;
 }
 h1.title1.text-medium {
     font-size: 60px;
     line-height: 65px;
 }
 .title2 {
-  font-family: montserratregular;
-  font-size: 24px;
+    font-family: montserratregular;
+    font-size: 24px;
 }
 p.sub-title {
     font-size: 18px;
@@ -135,15 +135,15 @@ p.sub-title {
     line-height: 50px;
 }
 .button.slider-btn {
-  background: #26ae61 none repeat scroll 0 0;
-  border-radius: 0;
-  font-family: "montserratsemi_bold";
-  font-size: 12px;
-  padding: 17px 39px;
+    background: #26ae61 none repeat scroll 0 0;
+    border-radius: 0;
+    font-family: "montserratsemi_bold";
+    font-size: 12px;
+    padding: 17px 39px;
 }
 .button.slider-btn:after{
-  background:rgba(0, 0, 0, 0.2) none repeat scroll 0 0;
-  z-index: 1;
+    background:rgba(0, 0, 0, 0.2) none repeat scroll 0 0;
+    z-index: 1;
 }
 .background-area .button-default {display: inline}
 .banner-content.static-text {
@@ -155,8 +155,8 @@ p.sub-title {
     z-index: 9;
 }
 .banner-content .text-content-wrapper.full-width {
-	float: none;
-	margin: auto;
-	position: relative;
-	z-index: 9;
+    float: none;
+    margin: auto;
+    position: relative;
+    z-index: 9;
 }

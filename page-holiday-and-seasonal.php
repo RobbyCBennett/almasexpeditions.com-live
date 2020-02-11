@@ -1,11 +1,11 @@
 <?php
-/**
-Template Name: Holiday & Seasonal Page
- */
+/*
+    Template Name: Holiday & Seasonal Page
+*/
 
 get_header();
 ?>
-    <div class="banner-text-area-all-trips bg-5 bg-black-transparent-layer" style="background-image: url(<?php if(get_field('background_image')) the_field('background_image'); ?>);">
+    <div id="clearNavHere" class="banner-text-area-all-trips bg-5 bg-black-transparent-layer" style="background-image: url(<?php if(get_field('background_image')) the_field('background_image'); ?>);">
         <div class="container">
             <div class="row">
                 <div class="col-xl-10 col-lg-12">
@@ -56,7 +56,8 @@ get_header();
                             <a href="<?php the_permalink(); ?>">
                                 <div class="place-card">
                                     <div class="img-text-holder">
-                                        <img src="<?php $image = get_field('thumbnail _image'); echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>">
+                                        <?php $src = wp_get_attachment_image_url(get_field('thumbnail _image'), 'original'); ?>
+                                        <img src="<?php echo $src; ?>" alt="<?php echo $image['alt']; ?>">
                                         <div class="img-text">
                                             <p><?php the_field('title'); ?></p>
                                         </div>
@@ -83,5 +84,3 @@ get_header();
 <?php
 
 get_footer();
-
-

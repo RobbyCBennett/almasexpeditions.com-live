@@ -1,18 +1,18 @@
 <?php
-/**
-Template Name: Tour Search Page
- */
+/*
+    Template Name: Tour Search Page
+*/
 
 $destination = '';
 $duration = '';
 $style = '';
 $message = 'Search Results For';
 
-$array = array('relation' => 'AND');
+$meta_query = array();
 
 if(!empty($_GET['destination'])){
     $destination = $_GET['destination'];
-    array_push($array,array(
+    array_push($meta_query ,array(
         'key' => 'destination',
         'value' => $destination,
         'compare' => 'LIKE'
@@ -23,18 +23,38 @@ if(!empty($_GET['destination'])){
 
 if(!empty($_GET['duration'])){
     $duration = $_GET['duration'];
-    array_push($array, array(
-        'key' => 'd_duration',
-        'value' => $duration,
-        'compare' => '='
-    ));
+
+    if ($duration == '1-3') {
+        array_push($meta_query, array(
+            'key' => 'd_duration',
+            'value' => array(1,3),
+            'type'    => 'numeric',
+            'compare' => 'BETWEEN'
+        ));
+    }
+    elseif ($duration == '4-7') {
+        array_push($meta_query, array(
+            'key' => 'd_duration',
+            'value' => array(4,7),
+            'type'    => 'numeric',
+            'compare' => 'BETWEEN'
+        ));
+    }
+    elseif ($duration == '8-12') {
+        array_push($meta_query, array(
+            'key' => 'd_duration',
+            'value' => array(8,12),
+            'type'    => 'numeric',
+            'compare' => 'BETWEEN'
+        ));
+    }
 
     $message = $message . " Duration : <span>".$duration." Days,</span>";
 }
 
 if(!empty($_GET['style'])){
     $style = $_GET['style'];
-    array_push($array, array(
+    array_push($meta_query, array(
         'key' => 'style',
         'value' => $style,
         'compare' => 'LIKE'
@@ -51,16 +71,9 @@ if(!empty($_GET['style'])){
     $message = $message . " Style : <span>".$style."</span>";
 }
 
-
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-
-$args = array(
-    'post_type'		=> 'tour',
-    'posts_per_page' => 20,
-    'paged' => $paged,
-    'meta_query'	=> $array
-);
-
+if( !empty($meta_query) ){
+    $meta_query['relation'] = 'AND';
+}
 
 get_header();
 ?>
@@ -90,53 +103,14 @@ get_header();
             <div class="next-tour mt-50">
                 <div class="row">
 
-                    <?php $loop = new WP_Query($args); ?>
-
-
-                    <?php if($loop->have_posts()){?>
-
-                        <?php while($loop->have_posts()) : $loop->the_post(); ?>
-                            <div class="col-md-4 col-lg-4 col-sm-4 pb-30">
-                                <a href="<?php the_permalink(); ?>">
-                                    <div class="place-card">
-                                        <div class="img-text-holder">
-                                            <img src="<?php $image = get_field('thumbnail _image'); echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>">
-                                            <div class="img-text">
-                                                <p><?php the_field('title'); ?></p>
-                                            </div>
-                                        </div>
-                                        <ul class="place-detail">
-                                            <li><p class="time"><?php the_field('d_duration'); ?> Days</p></li>
-                                            <li><p class="price">Starting From $<?php the_field('price'); ?> per person</p></li>
-                                        </ul>
-                                    </div>
-                                </a>
-                            </div>
-
-                        <?php endwhile; ?>
-                        <?php wp_reset_query(); ?>
-
-                    <?php }else{?>
-
-                       <div class="col-md-12">
-                           <div class="card alert alert-danger">
-                               <div class="card-body">
-                                   <h2 style="text-align: Center"><i class="fa fa-meh-o" aria-hidden="true"></i> Oops ! Not Found.</h2>
-                                   <h3 style="text-align: center">Try Another</h3>
-                               </div>
-                           </div>
-                       </div>
-
-
-                    <?php } ?>
-
-                    <!-- row ended -->
+                    <?php load_include('related-trips', ['meta_query' => $meta_query, 'showNotFound' => true]); ?>
 
                 </div>
             </div>
         </div>
     </section>
-<?php include(TEMPLATEPATH . '/template-parts/shared/find-tour.php') ?>
+
+    <?php load_include('shared/find-tour') ?>
 
 <?php
 
